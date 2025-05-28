@@ -41,7 +41,7 @@ class _NewTransactionState extends State<NewTransaction> {
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     return SingleChildScrollView(
       child: Container(
-        padding: EdgeInsets.fromLTRB(10, 10, 10, MediaQuery.of(context).viewInsets.bottom + 10),
+        padding: EdgeInsets.fromLTRB(10, 10, 10, MediaQuery.viewInsetsOf(context).bottom + 10),
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.end,
           children: <Widget>[

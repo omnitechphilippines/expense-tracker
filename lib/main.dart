@@ -79,15 +79,16 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
-    final MediaQueryData mediaQuery = MediaQuery.of(context);
+    final Orientation orientation = MediaQuery.orientationOf(context);
+    final EdgeInsets padding = MediaQuery.paddingOf(context);
     final Size size = MediaQuery.sizeOf(context);
-    final bool isLandscape = mediaQuery.orientation == Orientation.landscape;
+    final bool isLandscape = orientation == Orientation.landscape;
     final bool isDarkMode = Theme.of(context).brightness == Brightness.dark;
     final AppBar appBar = AppBar(title: Text('Personal Expenses', style: TextStyle(color: kColorScheme.onPrimary, fontSize: 20, fontFamily: 'Quicksand')), actions: <Widget>[IconButton(onPressed: () => _addNewTransactionModal(context), icon: const Icon(Icons.add))]);
     final CupertinoNavigationBar iosAppBar = CupertinoNavigationBar(middle: const Text('Personal Expenses'), trailing: GestureDetector(onTap: () => _addNewTransactionModal(context), child: const Icon(CupertinoIcons.add)));
-    final SizedBox smallChartWidget = SizedBox(height: (size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.3, child: Chart(recentTransactions: _recentTransactions));
-    final SizedBox bigChartWidget = SizedBox(height: (size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7, child: Chart(recentTransactions: _recentTransactions));
-    final SizedBox transactionWidget = SizedBox(height: (size.height - appBar.preferredSize.height - mediaQuery.padding.top) * 0.7, child: TransactionList(transactions: _transactions, deleteTransaction: _deleteTransaction, isDarkMode: isDarkMode));
+    final SizedBox smallChartWidget = SizedBox(height: (size.height - appBar.preferredSize.height - padding.top) * 0.3, child: Chart(recentTransactions: _recentTransactions));
+    final SizedBox bigChartWidget = SizedBox(height: (size.height - appBar.preferredSize.height - padding.top) * 0.7, child: Chart(recentTransactions: _recentTransactions));
+    final SizedBox transactionWidget = SizedBox(height: (size.height - appBar.preferredSize.height - padding.top) * 0.7, child: TransactionList(transactions: _transactions, deleteTransaction: _deleteTransaction, isDarkMode: isDarkMode));
     final SafeArea body = SafeArea(
       child: SingleChildScrollView(
         child: Column(
